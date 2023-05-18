@@ -1,8 +1,10 @@
 package com.wavestore.service.products.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.wavestore.service.products.commons.entity.BassAmpCabinet;
 
@@ -12,7 +14,7 @@ public interface IBassAmpCabinetService {
 	
 	public Page<BassAmpCabinet> findAllWithPagination(int offset, int limit);
 	
-	public List<BassAmpCabinet> findByBrand(int brand);
+	public Page<BassAmpCabinet> findByBrandIn(Collection<Integer> brands, Pageable pageable);
 	
 	public BassAmpCabinet findById(int id);
 

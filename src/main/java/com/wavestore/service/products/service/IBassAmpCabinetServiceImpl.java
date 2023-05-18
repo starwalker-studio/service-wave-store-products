@@ -1,10 +1,12 @@
 package com.wavestore.service.products.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,8 +34,8 @@ public class IBassAmpCabinetServiceImpl implements IBassAmpCabinetService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<BassAmpCabinet> findByBrand(int brand) {
-		return (List<BassAmpCabinet>) bassAmpCabinetDao.findByBrand(brand);
+	public Page<BassAmpCabinet> findByBrandIn(Collection<Integer> brands, Pageable pageable) {
+		return (Page<BassAmpCabinet>) bassAmpCabinetDao.findByBrandIn(brands, pageable);
 	}
 
 	@Override
