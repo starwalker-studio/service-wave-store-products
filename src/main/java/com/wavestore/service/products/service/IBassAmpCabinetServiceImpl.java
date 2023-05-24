@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wavestore.service.products.commons.entity.BassAmpCabinet;
+import com.wavestore.service.products.commons.entity.Brand;
 import com.wavestore.service.products.dao.BassAmpCabinetDao;
 
 @Service
@@ -48,6 +49,12 @@ public class IBassAmpCabinetServiceImpl implements IBassAmpCabinetService {
 	@Transactional(readOnly = true)
 	public long countTable() {
 		return bassAmpCabinetDao.count();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Brand> findDistinctBrand() {
+		return (List<Brand>) bassAmpCabinetDao.findDistinctBrand();
 	}
 
 

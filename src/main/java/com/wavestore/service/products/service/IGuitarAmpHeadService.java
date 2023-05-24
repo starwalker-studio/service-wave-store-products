@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.wavestore.service.products.commons.entity.Brand;
 import com.wavestore.service.products.commons.entity.GuitarAmpHead;
 
 public interface IGuitarAmpHeadService {
@@ -19,5 +20,7 @@ public interface IGuitarAmpHeadService {
 	public GuitarAmpHead findById(int id);
 
 	public long countTable();
+	
+	public List<Brand> findDistinctBrand();
 
 }

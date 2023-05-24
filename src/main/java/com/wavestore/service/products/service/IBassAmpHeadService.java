@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.wavestore.service.products.commons.entity.BassAmpHead;
+import com.wavestore.service.products.commons.entity.Brand;
 
 public interface IBassAmpHeadService {
 
@@ -19,5 +20,7 @@ public interface IBassAmpHeadService {
 	public BassAmpHead findById(int id);
 
 	public long countTable();
+	
+	public List<Brand> findDistinctBrand();
 	
 }

@@ -10,12 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wavestore.service.products.commons.entity.Brand;
 import com.wavestore.service.products.commons.entity.GuitarAmpHead;
 import com.wavestore.service.products.dao.GuitarAmpHeadDao;
 
 @Service
 public class IGuitarAmpHeadServiceImpl implements IGuitarAmpHeadService {
-	
+
 	@Autowired
 	private GuitarAmpHeadDao guitarAmpHeadDao;
 
@@ -48,6 +49,12 @@ public class IGuitarAmpHeadServiceImpl implements IGuitarAmpHeadService {
 	@Transactional(readOnly = true)
 	public long countTable() {
 		return guitarAmpHeadDao.count();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Brand> findDistinctBrand() {
+		return (List<Brand>) guitarAmpHeadDao.findDistinctBrand();
 	}
 
 }

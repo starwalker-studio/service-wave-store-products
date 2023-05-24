@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wavestore.service.products.commons.entity.Brand;
 import com.wavestore.service.products.commons.entity.GuitarComboAmp;
 import com.wavestore.service.products.dao.GuitarComboAmpDao;
 
@@ -49,5 +50,11 @@ public class IGuitarComboAmpServiceImpl implements IGuitarComboAmpService {
 	public long countTable() {
 		return guitarComboAmpDao.count();
 	}
-
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Brand> findDistinctBrand() {
+		return (List<Brand>) guitarComboAmpDao.findDistinctBrand();
+	}
+	
 }
