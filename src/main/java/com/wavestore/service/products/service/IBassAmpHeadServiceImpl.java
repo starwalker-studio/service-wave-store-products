@@ -2,6 +2,7 @@ package com.wavestore.service.products.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ import com.wavestore.service.products.dao.BassAmpHeadDao;
 
 @Service
 public class IBassAmpHeadServiceImpl implements IBassAmpHeadService {
-	
+
 	@Autowired
 	private BassAmpHeadDao bassAmpHeadDao;
 
@@ -50,11 +51,24 @@ public class IBassAmpHeadServiceImpl implements IBassAmpHeadService {
 	public long countTable() {
 		return bassAmpHeadDao.count();
 	}
-	
+
+	@Override
+	public Page<BassAmpHead> findByCustomSearch(Optional<Double> mayor,
+			Optional<Double> minor, Optional<Collection<Integer>> brands,
+			Optional<String> inStock, int offset, int limit) {
+		return (Page<BassAmpHead>) bassAmpHeadDao.findByCustomSearch(mayor, minor, brands, inStock, PageRequest.of(offset, limit));
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Brand> findDistinctBrand() {
 		return (List<Brand>) bassAmpHeadDao.findDistinctBrand();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public BassAmpHead findByItemID(String itemID) {
+		return bassAmpHeadDao.findByItemID(itemID);
 	}
 
 }

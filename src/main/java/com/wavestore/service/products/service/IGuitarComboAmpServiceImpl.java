@@ -2,6 +2,7 @@ package com.wavestore.service.products.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,11 +51,25 @@ public class IGuitarComboAmpServiceImpl implements IGuitarComboAmpService {
 	public long countTable() {
 		return guitarComboAmpDao.count();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<GuitarComboAmp> findByCustomSearch(Optional<Double> mayor,
+			Optional<Double> minor, Optional<Collection<Integer>> brands, 
+			Optional<String> inStock, int offset, int limit) {
+		return (Page<GuitarComboAmp>) guitarComboAmpDao.findByCustomSearch(mayor, minor, brands, inStock, PageRequest.of(offset, limit));
+	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Brand> findDistinctBrand() {
 		return (List<Brand>) guitarComboAmpDao.findDistinctBrand();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public GuitarComboAmp findByItemID(String itemID) {
+		return guitarComboAmpDao.findByItemID(itemID);
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.wavestore.service.products.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +24,9 @@ public interface IBassComboAmpService {
 	
 	public List<Brand> findDistinctBrand();
 
+	public Page<BassComboAmp> findByCustomSearch(Optional<Double> mayor,
+			Optional<Double> minor, Optional<Collection<Integer>> brands, 
+			Optional<String> inStock, int offset, int limit);
+
+	public BassComboAmp findByItemID(String itemID);
 }

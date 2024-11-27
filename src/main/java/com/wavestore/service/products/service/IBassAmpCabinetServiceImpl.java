@@ -2,6 +2,7 @@ package com.wavestore.service.products.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class IBassAmpCabinetServiceImpl implements IBassAmpCabinetService {
 		Page<BassAmpCabinet> bassAmpCabinet = bassAmpCabinetDao.findAll(PageRequest.of(offset, limit));
 		return bassAmpCabinet;
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public Page<BassAmpCabinet> findByBrandIn(Collection<Integer> brands, Pageable pageable) {
@@ -53,9 +54,22 @@ public class IBassAmpCabinetServiceImpl implements IBassAmpCabinetService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Page<BassAmpCabinet> findByCustomSearch(Optional<Double> mayor,
+			Optional<Double> minor, Optional<Collection<Integer>> brands, 
+			Optional<String> inStock, int offset, int limit) {
+		return (Page<BassAmpCabinet>) bassAmpCabinetDao.findByCustomSearch(mayor, minor, brands, inStock, PageRequest.of(offset, limit));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public List<Brand> findDistinctBrand() {
 		return (List<Brand>) bassAmpCabinetDao.findDistinctBrand();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public BassAmpCabinet findByItemID(String item) {
+		return bassAmpCabinetDao.findByItemID(item);
+	}
 
 }
